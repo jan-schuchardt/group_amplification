@@ -1,7 +1,7 @@
 # Provable Adversarial Robustness for Group Equivariant Tasks
 
 <p align="left">
-<img src="https://www.cs.cit.tum.de/fileadmin/w00cfj/daml/_my_direct_uploads/group_privacy_thumbnail.png", width="33%">
+<img src="https://www.cs.cit.tum.de/fileadmin/w00cfj/daml/_my_direct_uploads/group_privacy_thumbnail.png", width="75%">
 
 This is the official implementation of 
 
