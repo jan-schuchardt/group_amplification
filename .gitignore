@@ -1,0 +1,6 @@
+*.png
+*egg-info
+__pycache__
+raw_data
+plotting/neurips_24_rebuttal/mnist/lightning_logs
+plotting/camera/mnist/lightning_logs

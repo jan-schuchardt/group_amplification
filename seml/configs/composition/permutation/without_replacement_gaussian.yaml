@@ -1,0 +1,48 @@
+seml:
+  executable: seml/scripts/composition/eval_permutation.py
+  conda_environment: group_amplification
+  project_root_dir: ../../..
+  output_dir: anonymous
+  name: wor_baseline
+
+slurm:
+  experiments_per_job: 1
+  sbatch_options:
+    gres: gpu:0
+    mem: 4G          # memory
+    cpus-per-task: 2  # num cores
+    time: 00-00:10     # max time, D-HH:MM
+    partition: cpu
+    qos: phdcpu
+
+fixed:
+  save_dir: anonymous
+
+  alphas:
+    space: log_continuous
+    params:
+      start: 0
+      stop: 2
+      num: 121
+
+  base_mechanism:
+    name: gaussian
+  
+  amplification:
+    subsampling_scheme: withoutreplacement
+    params:
+      n_chunks: 2
+      n_iterations: 2
+      eval_params:
+        dps: 50
+
+grid:
+  base_mechanism.params.standard_deviation:
+    type: choice
+    options:
+      - 0.1
+      - 0.2
+      - 0.5
+      - 1.0
+      - 2.0
+      - 5.0

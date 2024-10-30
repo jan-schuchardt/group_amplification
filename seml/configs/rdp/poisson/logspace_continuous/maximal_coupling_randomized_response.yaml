@@ -1,0 +1,64 @@
+seml:
+  executable: seml/scripts/rdp/eval_poisson.py
+  conda_environment: group_amplification
+  project_root_dir: ../../../../..
+  output_dir: /ceph/hdd/staff/schuchaj/group_amplification_results/neurips24/logs
+  name: poisson_baseline
+
+slurm:
+  experiments_per_job: 1
+  sbatch_options:
+    gres: gpu:0
+    mem: 4G          # memory
+    cpus-per-task: 2  # num cores
+    time: 00-00:10     # max time, D-HH:MM
+    partition: cpu,cpu_large
+    qos: phdcpu
+
+fixed:
+  save_dir: /ceph/hdd/staff/schuchaj/group_amplification_results/neurips24/rdp/poisson
+
+  alphas:
+    space: log_continuous
+    params:
+      start: 0
+      stop: 1
+      num: 121
+
+  base_mechanism:
+    name: randomizedresponse
+  
+  amplification:
+    subsampling_scheme: poisson
+    tight: True
+    params:
+      eval_method: maximalcoupling
+
+grid:
+  base_mechanism.params.true_response_prob:
+    type: choice
+    options:
+      - 0.55
+      - 0.6
+      - 0.7
+      - 0.75
+      - 0.8
+      - 0.9
+      - 0.95
+  amplification.params.subsampling_rate:
+    type: choice
+    options:
+      - 0.5
+      - 0.2
+      - 0.1
+      - 0.01
+      - 0.001
+  
+  amplification.params.group_size:
+    type: choice
+    options:
+      - 1
+      - 2
+      - 4
+      - 8
+

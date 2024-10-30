@@ -1,0 +1,153 @@
+seml:
+  executable: seml/scripts/composition/eval_pld.py
+  conda_environment: group_amplification
+  project_root_dir: ../../../..
+  output_dir: anonymous
+  name: pld_baseline
+
+slurm:
+  experiments_per_job: 1
+  sbatch_options:
+    gres: gpu:0
+    mem: 4G          # memory
+    cpus-per-task: 2  # num cores
+    time: 00-00:10     # max time, D-HH:MM
+    partition: cpu,cpu_large
+    qos: phdcpu
+
+fixed:
+  save_dir: anonymous
+
+  epsilons:
+    space: linear_continuous
+
+  base_mechanism:
+    name: gaussian
+  
+  amplification:
+    subsampling_scheme: poisson
+    tight: True
+    params:
+      iterations: 1000
+
+grid:
+  epsilons.params.start:
+    type: choice
+    options:
+      - 1
+      - 0.1
+    zip_id: eps
+  
+  epsilons.params.stop:
+    type: choice
+    options:
+      - 8
+      - 0.9
+    zip_id: eps
+  
+  epsilons.params.num:
+    type: choice
+    options:
+      - 8
+      - 9
+    zip_id: eps
+
+  base_mechanism.params.standard_deviation:
+    type: choice
+    options:
+      - 1.0
+      - 2.0
+      - 5.0
+  
+  amplification.params.subsampling_rate:
+    type: choice
+    options:
+      - 0.01
+      - 0.001
+  
+  amplification.params.eval_params.value_discretization_interval:
+    type: choice
+    options:
+      - 0.001
+
+  amplification.params.group_size:
+    type: choice
+    options:
+      - 1
+      - 1
+      - 2
+      - 2
+      - 2
+      - 4
+      - 4
+      - 4
+      - 4
+      - 4
+      - 8
+      - 8
+      - 8
+      - 8
+      - 8
+      - 8
+      - 8
+      - 8
+      - 8
+      - 16
+      - 16
+      - 16
+      - 16
+      - 16
+      - 16
+      - 16
+      - 16
+      - 16
+      - 16
+      - 16
+      - 16
+      - 16
+      - 16
+      - 16
+      - 16
+      - 16
+    zip_id: group
+
+  amplification.params.insertions:
+    type: choice
+    options:
+      - 0
+      - 1
+      - 0
+      - 1
+      - 2
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+    zip_id: group

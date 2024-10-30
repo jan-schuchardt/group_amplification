@@ -1,0 +1,85 @@
+seml:
+  executable: seml/scripts/rdp/eval_without_replacement.py
+  conda_environment: group_amplification
+  project_root_dir: ../../../../../..
+  output_dir: /ceph/hdd/staff/schuchaj/group_amplification_results/neurips24/logs
+  name: wor_baseline
+
+slurm:
+  experiments_per_job: 1
+  sbatch_options:
+    gres: gpu:0
+    mem: 4G          # memory
+    cpus-per-task: 2  # num cores
+    time: 00-00:10     # max time, D-HH:MM
+    partition: cpu,cpu_large
+    qos: phdcpu
+
+fixed:
+  save_dir: /ceph/hdd/staff/schuchaj/group_amplification_results/neurips24/rdp/without_replacement
+
+  alphas:
+    space: log
+    params:
+      start: 0
+      stop: 4
+      num: 121
+
+  base_mechanism:
+    name: randomizedresponse
+  
+  amplification:
+    subsampling_scheme: withoutreplacement
+    tight: True
+    params:
+      eval_method: directtransport
+      eval_params:
+        hoelders_exponent: 2
+
+grid:
+  base_mechanism.params.true_response_prob:
+    type: choice
+    options:
+      - 0.55
+      - 0.6
+      - 0.7
+      - 0.75
+      - 0.8
+      - 0.9
+      - 0.95
+
+  amplification.params.group_size:
+    type: choice
+    options:
+      - 1
+      - 2
+      - 4
+      - 8
+
+  amplification.params.dataset_size:
+    type: choice
+    options:
+      - 1000
+      - 1000
+      - 1000
+      - 10000
+      - 10000
+      - 10000
+      - 100000
+      - 100000
+      - 100000
+    zip_id: sizes
+
+  amplification.params.batch_size:
+    type: choice
+    options:
+      - 100
+      - 10
+      - 1
+      - 1000
+      - 100
+      - 10
+      - 10000
+      - 1000
+      - 100
+    zip_id: sizes
