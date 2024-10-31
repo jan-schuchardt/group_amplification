@@ -1,4 +1,4 @@
-# Provable Adversarial Robustness for Group Equivariant Tasks
+# Unified Mechanism-Specific Amplification by Subsampling and Group Privacy Amplification
 
 <p align="left">
 <img src="https://www.cs.cit.tum.de/fileadmin/w00cfj/daml/_my_direct_uploads/group_privacy_thumbnail.png", width="75%">
